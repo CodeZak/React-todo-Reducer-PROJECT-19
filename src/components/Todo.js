@@ -1,16 +1,22 @@
 import React from "react";
-
-export default function Todo({ todo, toggleFunnel,deleteFunnel}) {
+import { ACTIONS } from "./App";
+export default function Todo({ todo, toggleFunnel, deleteFunnel, dispatch }) {
     const styles = {
         padding: "4px",
         marginLeft: "10px",
         color: todo.completed ? "white" : "yellow",
     };
     function toggleHandler() {
-        toggleFunnel(todo.completed, todo.id);
+        dispatch({
+            type: ACTIONS.TOGGLE_TODO,
+            payload: { isCompleted: todo.completed, id: todo.id },
+        });
     }
     function deleteHandler() {
-        deleteFunnel(todo.id);
+        dispatch({
+            type: ACTIONS.TOGGLE_DELETE,
+            payload: { id: todo.id },
+        });
     }
     return (
         <div style={styles}>

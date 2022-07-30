@@ -1,6 +1,7 @@
 import { useState, useReducer } from "react";
 import Todo from "./Todo";
-const ACTIONS = {
+
+export const ACTIONS = {
     ADD_TODO: "add-todo",
     TOGGLE_TODO: "toggle-todo",
     TOGGLE_DELETE: "toggle-delete",
@@ -38,20 +39,6 @@ function App() {
     console.log("todos :  ", todos);
     const [name, setName] = useState("");
 
-    function toggleFunnel(isCompleted, id) {
-        dispatch({
-            type: ACTIONS.TOGGLE_TODO,
-            payload: { isCompleted: isCompleted, id: id },
-        });
-    }
-
-    function deleteFunnel(id) {
-        dispatch({
-            type: ACTIONS.TOGGLE_DELETE,
-            payload: { id: id },
-        });
-    }
-    
     function handleSubmit(e) {
         e.preventDefault();
         setName("");
@@ -73,8 +60,7 @@ function App() {
                     <Todo
                         key={todo.id}
                         todo={todo}
-                        toggleFunnel={toggleFunnel}
-                        deleteFunnel={deleteFunnel}
+                        dispatch={dispatch}
                     />
                 );
             })}
